@@ -12,20 +12,30 @@ sudo apt-get install -y libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes
 echo "Installing packages for i3-gaps" ;
 sudo apt-get install -y meson dh-autoreconf libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev ;
 
+# Create missing directories
+[ ! -d "$HOME/.local" ] && mkdir "$HOME/.local";
+[ ! -d "$HOME/.local/share" ] && mkdir "$HOME/.local/share";
+[ ! -d "$HOME/.local/bin" ] && mkdir "$HOME/.local/bin";
+[ ! -d "$HOME/.themes" ] && mkdir "$HOME/.themes" ;
+[ ! -d "$HOME/.icons" ] && mkdir "$HOME/.icons" ;
+[ ! -d "$HOME/.local/share/fonts" ] && mkdir "$HOME/.local/share/fonts" ;
+
 # Create installing directory
 [ ! -d "$HOME/installing" ] && mkdir "$HOME/installing"; cd ~/installing ;
 
 # Build picom from source
 echo "Building picom" ;
 git clone https://github.com/ibhagwan/picom.git && 
-cd picom&&
+cd picom &&
 git submodule update --init --recursive &&
 meson --buildtype=release . build &&
 ninja -C build &&
 cd build &&
 sudo ninja install ; 
 
-cd ~/installing ;
+# Cleanup
+cd ~/installing && 
+rm -rf picom;
 
 # Build i3-gaps from source
 echo "Building i3-gaps" ;
@@ -52,7 +62,6 @@ EOL
 
 # Cleanup
 cd ~/installing && 
-rm -rf picom && 
 rm -rf i3-gaps ;
 
 # Installing firefox developer edition
@@ -86,7 +95,6 @@ EOL
 # Install Dracula theme for GTK
 # https://github.com/matheuuus/dracula-theme
 echo "Installing dracula theme" ;
-[ ! -d "$HOME/.themes" ] && mkdir "$HOME/.themes" ;
 curl -L0 https://github.com/matheuuus/dracula-theme/archive/refs/heads/master.zip --output Dracula.zip &&
 unzip Dracula.zip &&
 mv dracula-theme-master ~/.themes/Dracula && 
@@ -95,24 +103,25 @@ rm -rf Dracula.zip ;
 # Install Dracula icons
 # https://github.com/matheuuus/dracula-icons
 echo "Installing dracula icons" ;
-[ ! -d "$HOME/.icons" ] && mkdir "$HOME/.icons" ;
 curl -L0 https://github.com/matheuuus/dracula-icons/archive/refs/heads/main.zip --output Dracula-icons.zip && 
 unzip Dracula-icons.zip &&
 mv dracula-icons-main ~/.icons/Dracula && 
 rm -rf Dracula-icons.zip ;
 
 # Install fonts
-[ ! -d "$HOME/.local/share/fonts" ] && mkdir "$HOME/.local/share/fonts" ;
 # IPAExGothic (Japanese)
 echo "Installing Japanese font" ;
-sudo apt install -y fonts-ipaexfont-gothic ;
+sudo apt-get install -y fonts-ipaexfont-gothic ;
+
 # Font Awesome
-# curl -L0 https://github.com/FortAwesome/Font-Awesome/archive/refs/heads/master.zip --output Font-Awesome.zip &&
-# unzip Font-Awesome.zip && 
-# mv Font-Awesome-master/webfonts/*.ttf ~/.local/share/fonts/ &&
-# mv Font-Awesome-master/otfs/*.otf ~/.local/share/fonts/ &&
-# rm -rf Font-Awesome.zip &&
-# rm -rf Font-Awesome-master ;
+echo "Installing Font-Awesome font"
+curl -L0 https://github.com/FortAwesome/Font-Awesome/archive/refs/heads/master.zip --output Font-Awesome.zip &&
+unzip Font-Awesome.zip && 
+mv Font-Awesome-master/webfonts/*.ttf ~/.local/share/fonts/ &&
+mv Font-Awesome-master/otfs/*.otf ~/.local/share/fonts/ &&
+rm -rf Font-Awesome.zip &&
+rm -rf Font-Awesome-master ;
+
 # Nerd Font
 echo "Installing Nerd font" ;
 curl -L0 https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Overpass.zip --output NerdFonts.zip &&
@@ -122,7 +131,6 @@ rm -rf NerdFonts.zip;
 
 # Personal dotfiles
 echo "Installing personal dotfiles" ;
-[ ! -d "$HOME/.local/bin" ] && mkdir "$HOME/.local/bin" ;
 [ -d "$HOME/.config/bash" ] && rm -rf "$HOME/.config/bash" ;
 [ -d "$HOME/.config/dunst" ] && rm -rf "$HOME/.config/dunst" ;
 [ -d "$HOME/.config/flameshot" ] && rm -rf "$HOME/.config/flameshot" ;
@@ -144,6 +152,6 @@ git clone https://natperron@github.com/natperron/dotfiles.git &&
 mv dotfiles/.config/* ~/.config/ && 
 mv dotfiles/.bashrc ~/.bashrc && 
 mv dotfiles/.profile ~/.profile && 
-mv dotfiles/.local/share/fonts/* ~/.local/share/fonts/ &&
+# mv dotfiles/.local/share/fonts/* ~/.local/share/fonts/ &&
 mv dotfiles/.local/bin/* ~/.local/bin/ ;
 rm -rf dotfiles && cd && rm -rf installing;

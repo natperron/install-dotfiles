@@ -1,6 +1,6 @@
 # Install packages wanted and needed
 echo "Installing packages" ;
-sudo apt-get install -y git make cmake curl zip ranger exa autojump nitrogen arandr psmisc dunst libnotify-bin lxappearance qt5ct qt5-style-kvantum nautilus flameshot rxvt-unicode volumeicon-alsa blueman network-manager-gnome neofetch polybar rofi gdm3 ; 
+sudo apt-get install -y git make cmake curl zip ranger exa autojump nitrogen arandr psmisc dunst libnotify-bin lxappearance qt5ct qt5-style-kvantum nautilus flameshot rxvt-unicode volumeicon-alsa blueman network-manager-gnome neofetch polybar rofi gdm3 ;
 
 # Install dependencies for picom
 # https://github.com/ibhagwan/picom
@@ -35,7 +35,7 @@ git submodule update --init --recursive &&
 meson --buildtype=release . build &&
 ninja -C build &&
 cd build &&
-sudo ninja install ; 
+sudo ninja install; 
 
 # Cleanup
 cd ~/installing && 
@@ -78,7 +78,7 @@ sudo tar xfj firefox.tar.bz2 &&
 sudo rm -rf firefox.tar.bz2 &&
 sudo chown -R $USER:$USER /opt/firefox && 
 cd ~/installing ;
-[ ! -f "$HOME/.local/share/applications/firefoxDeveloperEdition.desktop" ] && 
+[ ! -f "$HOME/.local/share/applications/firefoxDeveloperEdition.desktop" ] &&
 touch "$HOME/.local/share/applications/firefoxDeveloperEdition.desktop" ;
 cat > ~/.local/share/applications/firefoxDeveloperEdition.desktop
 <<EOL
@@ -117,7 +117,7 @@ rm -rf Dracula-icons.zip ;
 # Install fonts
 # IPAExGothic (Japanese)
 echo "Installing Japanese font" ;
-sudo apt-get install -y fonts-ipaexfont-gothic ;
+sudo apt-get install -y fonts-ipaexfont-gothic;
 
 # Font Awesome
 echo "Installing Font-Awesome font"

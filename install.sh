@@ -13,9 +13,11 @@ echo "Installing packages for i3-gaps" ;
 sudo apt-get install -y meson dh-autoreconf libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev ;
 
 # Create missing directories
-[ ! -d "$HOME/.local" ] && mkdir "$HOME/.local";
-[ ! -d "$HOME/.local/share" ] && mkdir "$HOME/.local/share";
-[ ! -d "$HOME/.local/bin" ] && mkdir "$HOME/.local/bin";
+[ ! -d "$HOME/.config" ] && mkdir "$HOME/.config" ;
+[ ! -d "$HOME/.config/gtk-2.0" ] && mkdir "$HOME/.config/gtk-2.0" ;
+[ ! -d "$HOME/.local" ] && mkdir "$HOME/.local" ;
+[ ! -d "$HOME/.local/share" ] && mkdir "$HOME/.local/share" ;
+[ ! -d "$HOME/.local/bin" ] && mkdir "$HOME/.local/bin" ;
 [ ! -d "$HOME/.themes" ] && mkdir "$HOME/.themes" ;
 [ ! -d "$HOME/.icons" ] && mkdir "$HOME/.icons" ;
 [ ! -d "$HOME/.local/share/fonts" ] && mkdir "$HOME/.local/share/fonts" ;
@@ -46,6 +48,8 @@ cd build &&
 meson --prefix /usr/local && 
 ninja && 
 sudo ninja install ; 
+[ ! -f "/usr/share/xsessions/i3.desktop" ] && 
+touch "/usr/share/xsessions/i3.desktop" ;
 cat > /usr/share/xsessions/i3.desktop
 <<EOL
 [Desktop Entry]
@@ -58,7 +62,6 @@ X-LightDM-DesktopName=i3
 DesktopNames=i3
 Keywords=tiling;wm;windowmanager;window;manager;
 EOL
-;
 
 # Cleanup
 cd ~/installing && 
@@ -85,8 +88,7 @@ Type=Application
 Categories=Network;WebBrowser;Favorite;
 MimeType=text/html;text/xml;application/xhtml/xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp; X
 X-Ayatana-Desktop-Shortcuts=NewWindow;NewIncognitos;
-EOL 
-;
+EOL
 
 # Setting the theme from command line doesn't work with i3 and I'm too lazy
 # to do the editing of the config file directly, so I'll set it manually

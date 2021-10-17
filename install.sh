@@ -17,10 +17,12 @@ sudo apt-get install -y meson dh-autoreconf libxcb-keysyms1-dev libpango1.0-dev 
 [ ! -d "$HOME/.config/gtk-2.0" ] && mkdir "$HOME/.config/gtk-2.0" ;
 [ ! -d "$HOME/.local" ] && mkdir "$HOME/.local" ;
 [ ! -d "$HOME/.local/share" ] && mkdir "$HOME/.local/share" ;
+[ ! -d "$HOME/.local/share/applications" ] && mkdir "$HOME/.local/share/applications" ;
 [ ! -d "$HOME/.local/bin" ] && mkdir "$HOME/.local/bin" ;
 [ ! -d "$HOME/.themes" ] && mkdir "$HOME/.themes" ;
 [ ! -d "$HOME/.icons" ] && mkdir "$HOME/.icons" ;
 [ ! -d "$HOME/.local/share/fonts" ] && mkdir "$HOME/.local/share/fonts" ;
+[ ! -d "/usr/share/xsessions" ] && sudo mkdir "/usr/share/xsessions" ;
 
 # Create installing directory
 [ ! -d "$HOME/installing" ] && mkdir "$HOME/installing"; cd ~/installing ;
@@ -76,6 +78,8 @@ sudo tar xfj firefox.tar.bz2 &&
 sudo rm -rf firefox.tar.bz2 &&
 sudo chown -R $USER:$USER /opt/firefox && 
 cd ~/installing ;
+[ ! -f "$HOME/.local/share/applications/firefoxDeveloperEdition.desktop" ] && 
+touch "$HOME/.local/share/applications/firefoxDeveloperEdition.desktop" ;
 cat > ~/.local/share/applications/firefoxDeveloperEdition.desktop
 <<EOL
 [Desktop Entry]

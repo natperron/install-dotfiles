@@ -1,6 +1,6 @@
 # Install packages wanted and needed
 echo "Installing packages" ;
-sudo apt-get install -y git make cmake curl zip ranger exa autojump nitrogen arandr psmisc dunst libnotify-bin lxappearance qt5ct qt5-style-kvantum nautilus flameshot rxvt-unicode volumeicon-alsa blueman network-manager-gnome neofetch polybar rofi gdm3 ;
+sudo apt-get install -y git make cmake curl zip ranger exa autojump nitrogen arandr psmisc dunst libnotify-bin lxappearance qt5ct qt5-style-kvantum nautilus flameshot rxvt-unicode volumeicon-alsa blueman network-manager-gnome neofetch polybar rofi gdm3 papirus-icon-theme numix-icon-theme-circle ;
 
 # Install dependencies for picom
 # https://github.com/ibhagwan/picom
@@ -113,6 +113,10 @@ curl -L0 https://github.com/matheuuus/dracula-icons/archive/refs/heads/main.zip 
 unzip Dracula-icons.zip &&
 mv dracula-icons-main ~/.icons/Dracula && 
 rm -rf Dracula-icons.zip ;
+# Fix icons
+sed -i 's/Inherits=/Inherits=Numix Circle,Papirus-Dark,/' ~/.icons/Dracula/index.theme &&
+[ -f "/usr/share/icons/hicolor/scalable/apps/lutris.svg" ] && 
+cp "/usr/share/icons/hicolor/scalable/apps/lutris.svg" "$HOME/.icons/Dracula/scalable/apps/lutris.svg";
 
 # Install fonts
 # IPAExGothic (Japanese)

@@ -70,29 +70,12 @@ sudo mv i3.desktop /usr/share/xsessions ;
 cd ~/installing && 
 rm -rf i3-gaps ;
 
-# Installing firefox developer edition
-echo "Installing firefox developer edition" ;
-curl -s -L0 "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=en-CA" --output firefox.tar.bz2 &&
-sudo mv firefox.tar.bz2 /opt &&
-cd /opt &&
-sudo tar xfj firefox.tar.bz2 &&
-sudo rm -rf firefox.tar.bz2 &&
-sudo chown -R $USER:$USER /opt/firefox && 
-cd ~/installing ;
-[ ! -f "$HOME/.local/share/applications/firefoxDeveloperEdition.desktop" ] &&
-touch "$HOME/.local/share/applications/firefoxDeveloperEdition.desktop" ;
-cat > ~/.local/share/applications/firefoxDeveloperEdition.desktop <<EOL
-[Desktop Entry]
-Encoding=UTF-8
-Name=Firefox Developer Edition
-Exec=/opt/firefox/firefox
-Icon=/opt/firefox/browser/chrome/icons/default/default128.png
-Terminal=false
-Type=Application
-Categories=Network;WebBrowser;Favorite;
-MimeType=text/html;text/xml;application/xhtml/xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/ftp; X
-X-Ayatana-Desktop-Shortcuts=NewWindow;NewIncognitos;
-EOL
+# Installing google chrome
+echo "Installing google chrome" ;
+curl -s -L0 https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb --output google-chrome-stable.deb &&
+sudo apt-get install -y -q=2 ./google-chrome-stable.deb &&
+sudo sed -e 's/chrome-stable/chrome-stable --force-dark-mode/g' /usr/share/applications/google-chrome.desktop >/dev/null &&
+rm google-chrome-stable.deb ;
 
 # Setting the theme from command line doesn't work with i3 and I'm too lazy
 # to do the editing of the config file directly, so I'll set it manually
@@ -101,7 +84,7 @@ EOL
 # Install Dracula theme for GTK
 # https://github.com/matheuuus/dracula-theme
 echo "Installing dracula theme" ;
-curl -s -L0 https://github.com/matheuuus/dracula-theme/archive/refs/heads/master.zip --output Dracula.zip &&
+curl -s -L0 https://github.com/dracula/gtk/archive/refs/heads/master.zip --output Dracula.zip &&
 unzip -qq Dracula.zip &&
 mv dracula-theme-master ~/.themes/Dracula && 
 rm -rf Dracula.zip ;
@@ -109,7 +92,7 @@ rm -rf Dracula.zip ;
 # Install Dracula icons
 # https://github.com/matheuuus/dracula-icons
 echo "Installing dracula icons" ;
-curl -s -L0 https://github.com/matheuuus/dracula-icons/archive/refs/heads/main.zip --output Dracula-icons.zip && 
+curl -s -L0 https://github.com/natperron/dracula-icons/archive/refs/heads/main.zip --output Dracula-icons.zip && 
 unzip -qq Dracula-icons.zip &&
 mv dracula-icons-main ~/.icons/Dracula && 
 rm -rf Dracula-icons.zip ;
@@ -120,20 +103,14 @@ cp "/usr/share/icons/hicolor/scalable/apps/lutris.svg" "$HOME/.icons/Dracula/sca
 
 # Install fonts
 # IPAExGothic (Japanese)
-echo "Installing Japanese font" ;
+echo "Installing fonts" ;
 sudo apt-get install -y -q=2 fonts-ipaexfont-gothic;
-
-# Font Awesome
-echo "Installing Font-Awesome font"
 curl -s -L0 https://github.com/FortAwesome/Font-Awesome/archive/refs/heads/master.zip --output Font-Awesome.zip &&
 unzip -qq Font-Awesome.zip && 
 mv Font-Awesome-master/webfonts/*.ttf ~/.local/share/fonts/ &&
 mv Font-Awesome-master/otfs/*.otf ~/.local/share/fonts/ &&
 rm -rf Font-Awesome.zip &&
 rm -rf Font-Awesome-master ;
-
-# Nerd Font
-echo "Installing Nerd font" ;
 curl -s -L0 https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Overpass.zip --output NerdFonts.zip &&
 unzip -qq NerdFonts.zip &&
 mv *.otf ~/.local/share/fonts/ && 

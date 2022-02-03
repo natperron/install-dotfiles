@@ -74,7 +74,7 @@ rm -rf i3-gaps ;
 echo "Installing google chrome" ;
 curl -s -L0 https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb --output google-chrome-stable.deb &&
 sudo apt-get install -y -q=2 ./google-chrome-stable.deb &&
-sudo sed -e 's/chrome-stable/chrome-stable --force-dark-mode/g' /usr/share/applications/google-chrome.desktop >/dev/null &&
+sudo sed -i 's/chrome-stable/chrome-stable --force-dark-mode/g' /usr/share/applications/google-chrome.desktop &&
 rm google-chrome-stable.deb ;
 
 # Setting the theme from command line doesn't work with i3 and I'm too lazy
@@ -98,8 +98,7 @@ mv dracula-icons-main ~/.icons/Dracula &&
 rm -rf Dracula-icons.zip ;
 # Fix icons
 sed -i 's/Inherits=/Inherits=Numix Circle,Papirus-Dark,/' ~/.icons/Dracula/index.theme &&
-[ -f "/usr/share/icons/hicolor/scalable/apps/lutris.svg" ] && 
-cp "/usr/share/icons/hicolor/scalable/apps/lutris.svg" "$HOME/.icons/Dracula/scalable/apps/lutris.svg";
+rm "$HOME/.icons/Dracula/scalable/apps/lutris.svg";
 
 # Install fonts
 # IPAExGothic (Japanese)

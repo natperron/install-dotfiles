@@ -1,16 +1,91 @@
+#!/usr/bin/env bash
+
 # Install packages wanted and needed
 echo "Installing packages" ;
-sudo apt-get install -y -q=2 git make cmake curl zip ranger exa autojump nitrogen arandr psmisc dunst libnotify-bin lxappearance qt5ct qt5-style-kvantum nautilus flameshot rxvt-unicode volumeicon-alsa blueman network-manager-gnome neofetch polybar rofi gdm3 papirus-icon-theme numix-icon-theme-circle ;
+sudo apt-get install -y -q=2 \
+    arandr \
+    autojump \
+    blueman \
+    cmake \
+    curl \
+    dunst \
+    exa \
+    flameshot \
+    gdm3 \
+    git \
+    libnotify-bin \
+    lxappearance \
+    make \
+    nautilus \
+    neofetch \
+    network-manager-gnome \
+    nitrogen \
+    numix-icon-theme-circle \
+    papirus-icon-theme \
+    polybar \
+    psmisc \
+    qt5-style-kvantum \
+    qt5ct \
+    ranger \
+    rofi \
+    rxvt-unicode \
+    volumeicon-alsa \
+    zip
+
 
 # Install dependencies for picom
 # https://github.com/ibhagwan/picom
 echo "Installing packages for picom" ;
-sudo apt-get install -y -q=2 libxext-dev libxcb1-dev libxcb-damage0-dev libxcb-xfixes0-dev libxcb-shape0-dev libxcb-render-util0-dev libxcb-render0-dev libxcb-randr0-dev libxcb-composite0-dev libxcb-image0-dev libxcb-present-dev libxcb-xinerama0-dev libxcb-glx0-dev libpixman-1-dev libdbus-1-dev libconfig-dev libgl1-mesa-dev libpcre2-dev libpcre3-dev libevdev-dev uthash-dev libev-dev libx11-xcb-dev ;
+sudo apt-get install -y -q=2 \
+    libconfig-dev \
+    libdbus-1-dev \
+    libev-dev \
+    libevdev-dev \
+    libgl1-mesa-dev \
+    libpcre2-dev \
+    libpcre3-dev \
+    libpixman-1-dev \
+    libx11-xcb-dev \
+    libxcb-composite0-dev \
+    libxcb-damage0-dev \
+    libxcb-glx0-dev \
+    libxcb-image0-dev \
+    libxcb-present-dev \
+    libxcb-randr0-dev \
+    libxcb-render-util0-dev \
+    libxcb-render0-dev \
+    libxcb-shape0-dev \
+    libxcb-xfixes0-dev \
+    libxcb-xinerama0-dev \
+    libxcb1-dev \
+    libxext-dev \
+    uthash-dev
 
 # Install dependecies for i3-gaps
 # https://github.com/Airblader/i3
 echo "Installing packages for i3-gaps" ;
-sudo apt-get install -y -q=2 meson dh-autoreconf libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev ;
+sudo apt-get install -y -q=2 \
+    dh-autoreconf \
+    libev-dev \
+    libpango1.0-dev \
+    libstartup-notification0-dev \
+    libxcb-cursor-dev \
+    libxcb-icccm4-dev \
+    libxcb-keysyms1-dev \
+    libxcb-randr0-dev \
+    libxcb-shape0 \
+    libxcb-shape0-dev \
+    libxcb-util0-dev \
+    libxcb-xinerama0-dev \
+    libxcb-xkb-dev \
+    libxcb-xrm-dev \
+    libxcb-xrm0 \
+    libxcb1-dev \
+    libxkbcommon-dev \
+    libxkbcommon-x11-dev \
+    libyajl-dev \
+    meson \
+    xcb
 
 # Create missing directories
 [ ! -d "$HOME/.config" ] && mkdir "$HOME/.config" ;
